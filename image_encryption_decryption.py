@@ -90,7 +90,7 @@ def open_img():
 def en_fun():
     global x, image_encrypted, key
     # print(x)
-    image_input = imread(x, IMREAD_GRAYSCALE)# 'C:/Users/aakas/Documents/flower.jpg'
+    image_input = cv2.imread(x, 0)# 'C:/Users/aakas/Documents/flower.jpg'
     (x1, y) = image_input.shape
     image_input = image_input.astype(float) / 255.0
     # print(image_input)
@@ -99,7 +99,7 @@ def en_fun():
     key = np.random.normal(mu, sigma, (x1, y)) + np.finfo(float).eps
     # print(key)
     image_encrypted = image_input / key
-    imwrite('image_encrypted.jpg', image_encrypted * 255)
+    cv2.imwrite('image_encrypted.jpg', image_encrypted * 255)
 
     imge = Image.open('image_encrypted.jpg')
     imge = ImageTk.PhotoImage(imge)
@@ -112,7 +112,7 @@ def de_fun():
     global image_encrypted, key
     image_output = image_encrypted * key
     image_output *= 255.0
-    imwrite('image_output.jpg', image_output)
+    cv2.imwrite('image_output.jpg', image_output)
 
     imgd = Image.open('image_output.jpg')
     imgd = ImageTk.PhotoImage(imgd)
